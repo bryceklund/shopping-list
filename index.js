@@ -24,9 +24,20 @@ $(function() { //handle form submission
 });
 
 $(function() {  //toggle strikethrough text on item card
+  $('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
+    const checkedItem = $(this).parents('li').find('.shopping-item'); //search the parents until an 'li' is found, then search that 'li' until a '.shopping-item' is found
+    checkedItem.toggleClass('shopping-item__checked');
+  })
+
+  /* bad event delegation; cards added after page load were not affected
   $('.shopping-item-toggle').click(event => {
-    const checkedItem = $('span').find('.shopping-item');
-    console.log(checkedItem);
-    checkedItem.toggleClass('.shopping-item__checked');
-  });
+  });*/
+
 })
+
+$(function() { //handle item deletion
+  $('.shopping-list').on('click', '.shopping-item-delete', function(event) { //stole selector from above
+    const deletedItem = $(this).parents('li'); //essentially stole this one too
+    deletedItem.remove(); 
+  })
+});
